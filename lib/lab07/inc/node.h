@@ -1,5 +1,5 @@
-#ifndef UNTITLED1_NODE_H
-#define UNTITLED1_NODE_H
+#ifndef CMPE126F17_LABS_LIB_LAB07_INC_NODE_H
+#define CMPE126F17_LABS_LIB_LAB07_INC_NODE_H
 
 // Yes, this is a very tiny node. Everything is accessibly publicly, without accessors or mutators
 namespace lab7 {
@@ -13,4 +13,4 @@ namespace lab7 {
     };
 }
 
-#endif //UNTITLED1_NODE_H
+#endif //CMPE126F17_LABS_LIB_LAB07_INC_NODE_H

@@ -1,5 +1,5 @@
-#ifndef CMPE126F17_LABS_TREE_H
-#define CMPE126F17_LABS_TREE_H
+#ifndef CMPE126F17_LABS_LIB_LAB07_INC_TREE_H
+#define CMPE126F17_LABS_LIB_LAB07_INC_TREE_H
 #include "node.h"
 
 namespace lab7 {
@@ -31,4 +31,4 @@ namespace lab7 {
         void print_gtl();
     };
 }
-#endif //CMPE126F17_LABS_TREE_H
+#endif //CMPE126F17_LABS_LIB_LAB07_INC_TREE_H

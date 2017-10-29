@@ -1,5 +1,5 @@
-#ifndef LAB4_LINKEDLIST_NODE_H
-#define LAB4_LINKEDLIST_NODE_H
+#ifndef CMPE126F17_LABS_LIB_LAB04_INC_NODE_H
+#define CMPE126F17_LABS_LIB_LAB04_INC_NODE_H
 
 namespace lab4 {
     class node {
@@ -35,4 +35,4 @@ namespace lab4 {
 
     };
 }
-#endif //LAB4_LINKEDLIST_NODE_H
+#endif //CMPE126F17_LABS_LIB_LAB04_INC_NODE_H
