@@ -3,7 +3,7 @@
 namespace lab7 {
     void clear(node *to_clear);
 
-    void node_print_gtl(node *to_print);
+    void node_print_gtl(node *top);
     void insert_recursively(node *top, int value);
     int level_recursively(node* top, int key);
     bool in_tree_recursively(node* top, int key);
@@ -11,6 +11,7 @@ namespace lab7 {
     int get_frequency_recursively(node* top, int key);
     unsigned depth_recursively(node* top);
     void path_recursively(node* top, int key);
+    void print_recursively(node* top);
 
     // Construct an empty tree
     tree::tree() {
@@ -73,15 +74,20 @@ namespace lab7 {
 
     // Print the tree least to greatest, Include duplicates
     void tree::print() {
-
+        print_recursively(root);
+        std::cout << std::endl;
     }
 
     void tree::print_gtl() {
-        //WILL BE PROVIDED FOR YOU
+        node_print_gtl(root);
+        std::cout << std::endl;
     }
 
-    void node_print_gtl(node *to_print) {
-        //WILL BE PROVIDED FOR YOU
+    void node_print_gtl(node *top) {
+        if(top == nullptr) return;
+        node_print_gtl(top->right);
+        for(int i = 0; i < top->frequency; i++) std::cout << top->data << " ";
+        node_print_gtl(top->left);
     }
 
     void clear(node *to_clear) {
@@ -156,5 +162,13 @@ namespace lab7 {
             if(key < top->data) path_recursively(top->left, key);
             else path_recursively(top->right, key);
         }
+    }
+
+    void print_recursively(node* top)
+    {
+        if(top == nullptr) return;
+        print_recursively(top->left);
+        for(int i = 0; i < top->frequency; i++) std::cout << top->data << " ";
+        print_recursively(top->right);
     }
 }

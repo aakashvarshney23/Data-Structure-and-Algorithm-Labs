@@ -10,7 +10,7 @@ int main() {
     std::cout << test_tree.size() << std::endl;
     test_tree.insert(5);
     std::cout << test_tree.depth() << std::endl;
-
+    test_tree.print();
     test_tree.insert(15);
     test_tree.insert(7);
     test_tree.insert(3);
@@ -29,5 +29,7 @@ int main() {
     std::cout << test_tree.get_frequency(5) << std::endl;
     std::cout << test_tree.get_frequency(11) << std::endl;
     std::cout << test_tree.depth() << std::endl;
+    test_tree.print();
+    test_tree.print_gtl();
     return 0;
 }
