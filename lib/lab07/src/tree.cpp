@@ -1,3 +1,4 @@
+#include <iostream>
 #include "../inc/tree.h"
 namespace lab7 {
     void clear(node *to_clear);
@@ -9,6 +10,7 @@ namespace lab7 {
     unsigned size_recursively(node* top);
     int get_frequency_recursively(node* top, int key);
     unsigned depth_recursively(node* top);
+    void path_recursively(node* top, int key);
 
     // Construct an empty tree
     tree::tree() {
@@ -44,7 +46,7 @@ namespace lab7 {
 
     // Print the path to the key, starting with root
     void tree::path_to(int key) {
-
+        if(in_tree(key)) path_recursively(root, key);
     }
 
     // Number of items in the tree
@@ -55,7 +57,8 @@ namespace lab7 {
 
     // Calculate the depth of the tree, longest string of connections
     unsigned tree::depth() {
-        return depth_recursively(root);
+        if( size() <= 1) return 0;
+        else return depth_recursively(root) - 1;
     }
 
     // Determine whether the given key is in the tree
@@ -132,6 +135,7 @@ namespace lab7 {
         else if(key < top->data) return get_frequency_recursively(top->left, key);
         else if(key > top->data) return get_frequency_recursively(top->right, key);
     }
+
     unsigned depth_recursively(node* top){
         if(top == nullptr) return 0;
         unsigned left = 0, right = 0;
@@ -139,5 +143,18 @@ namespace lab7 {
         right = 1 + depth_recursively(top->right);
         if(left > right) return left;
         else return right;
+    }
+
+    void path_recursively(node* top, int key){
+        std::cout << top->data;
+        if(top->data == key){
+            std::cout << std::endl;
+            return;
+        }
+        else {
+            std::cout << " -> ";
+            if(key < top->data) path_recursively(top->left, key);
+            else path_recursively(top->right, key);
+        }
     }
 }
