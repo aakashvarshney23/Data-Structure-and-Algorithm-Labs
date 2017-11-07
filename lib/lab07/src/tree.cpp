@@ -4,6 +4,8 @@ namespace lab7 {
 
     void node_print_gtl(node *to_print);
     void insert_recursively(node *top, int value);
+    int level_recursively(node* top, int key);
+    bool in_tree_recursively(node* top, int key);
 
     // Construct an empty tree
     tree::tree() {
@@ -33,7 +35,8 @@ namespace lab7 {
 
     // What level is key on?
     int tree::level(int key) {
-
+        if(in_tree(key)) return level_recursively(root, key);
+        else return -1;
     }
 
     // Print the path to the key, starting with root
@@ -53,7 +56,7 @@ namespace lab7 {
 
     // Determine whether the given key is in the tree
     bool tree::in_tree(int key) {
-
+        return in_tree_recursively(root, key);
     }
 
     // Return the number of times that value is in the tree
@@ -95,5 +98,20 @@ namespace lab7 {
             else insert_recursively(top->left, value);
         }
         else if( value == top->data ) top->frequency++;
+    }
+
+    int level_recursively(node* top, int key)
+    {
+        if( top -> data == key ) return 0;
+        else if (key < top->data) return 1 + level_recursively(top->left, key);
+        else if (key > top->data) return 1 + level_recursively(top->right, key);
+    }
+
+    bool in_tree_recursively(node* top, int key)
+    {
+        if(top == nullptr) return false;
+        else if(top->data == key) return true;
+        else if(key < top->data) return in_tree_recursively(top->left, key);
+        else if(key > top->data) return in_tree_recursively(top->right, key);
     }
 }
