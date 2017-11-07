@@ -7,6 +7,8 @@ namespace lab7 {
     int level_recursively(node* top, int key);
     bool in_tree_recursively(node* top, int key);
     unsigned size_recursively(node* top);
+    int get_frequency_recursively(node* top, int key);
+    unsigned depth_recursively(node* top);
 
     // Construct an empty tree
     tree::tree() {
@@ -53,7 +55,7 @@ namespace lab7 {
 
     // Calculate the depth of the tree, longest string of connections
     unsigned tree::depth() {
-
+        return depth_recursively(root);
     }
 
     // Determine whether the given key is in the tree
@@ -63,7 +65,7 @@ namespace lab7 {
 
     // Return the number of times that value is in the tree
     int tree::get_frequency(int key) {
-
+        return get_frequency_recursively(root, key);
     }
 
     // Print the tree least to greatest, Include duplicates
@@ -121,5 +123,21 @@ namespace lab7 {
     {
         if(top == nullptr) return 0;
         else return top->frequency + size_recursively(top->left) + size_recursively(top->right);
+    }
+
+    int get_frequency_recursively(node* top, int key)
+    {
+        if(top == nullptr) return 0;
+        else if(top->data == key) return top->frequency;
+        else if(key < top->data) return get_frequency_recursively(top->left, key);
+        else if(key > top->data) return get_frequency_recursively(top->right, key);
+    }
+    unsigned depth_recursively(node* top){
+        if(top == nullptr) return 0;
+        unsigned left = 0, right = 0;
+        left = 1 + depth_recursively(top->left);
+        right = 1 + depth_recursively(top->right);
+        if(left > right) return left;
+        else return right;
     }
 }
