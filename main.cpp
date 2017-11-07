@@ -23,6 +23,13 @@ int main() {
     test_tree.insert(8);
     test_tree.insert(6);
     test_tree.insert(5);
+    test_tree.print();
+    test_tree.remove(5);
+    test_tree.print();
+    test_tree.remove(5);
+    test_tree.print();
+    test_tree.remove(10);
+    test_tree.print();
     test_tree.path_to(8);
     std::cout << test_tree.level(10) << std::endl;
     std::cout << test_tree.size() << std::endl;
