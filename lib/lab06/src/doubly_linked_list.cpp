@@ -32,13 +32,13 @@
  */
 
 namespace lab6 {
-    // Default constructor
+// Default constructor
     doubly_linked_list::doubly_linked_list() {
         head = tail = nullptr;
         size = 0;
     }
 
-    // Take in a vector of inputs and construct a doubly linked list from them
+// Take in a vector of inputs and construct a doubly linked list from them
     doubly_linked_list::doubly_linked_list(std::vector<unsigned> values) {
         head = tail = new node(values[0]);
         size = values.size();
@@ -50,7 +50,7 @@ namespace lab6 {
         }
     }
 
-    // Copy constructor
+// Copy constructor
     doubly_linked_list::doubly_linked_list(const doubly_linked_list &original) {
         size = original.size;
         head = tail = new node(original.head->data);
@@ -61,19 +61,19 @@ namespace lab6 {
         }
     }
 
-    // Create doubly linked linked list with one input value
+// Create doubly linked linked list with one input value
     doubly_linked_list::doubly_linked_list(unsigned input) {
         head = tail = new node(input);
         size = 1;
     }
 
-    // Default constructor
+// Default constructor
     doubly_linked_list::~doubly_linked_list() {
         while (head != nullptr)
             remove(0);
     }
 
-    // return the value inside of the node located at position
+// return the value inside of the node located at position
     unsigned doubly_linked_list::get_data(unsigned position) {
         if (size <= position)
             throw "Invalid Position";
@@ -84,7 +84,7 @@ namespace lab6 {
         return temp_position->data;
     }
 
-    // Get a set of values between position_from to position_to
+// Get a set of values between position_from to position_to
     std::vector<unsigned> doubly_linked_list::get_set(unsigned position_from, unsigned position_to) {
         if (!is_valid(position_from) || !is_valid(position_to) || position_from >= position_to)
             throw "Invalid location";
@@ -101,12 +101,12 @@ namespace lab6 {
         return number_list;
     }
 
-    // Add a value to the end of the list
+// Add a value to the end of the list
     void doubly_linked_list::append(unsigned data) {
         insert_before(size, data);
     }
 
-    // Merge two lists together in place, placing the input list at the end of this list
+// Merge two lists together in place, placing the input list at the end of this list
     void doubly_linked_list::merge(doubly_linked_list rhs) {
         if ((*this).is_empty() || rhs.is_empty())
             throw "invalid lists: cannot append empty lists";
@@ -117,7 +117,7 @@ namespace lab6 {
         }
     }
 
-    // Allow for the merging of two lists using the + operator.
+// Allow for the merging of two lists using the + operator.
     doubly_linked_list doubly_linked_list::operator+(const doubly_linked_list &rhs) const {
         doubly_linked_list result(*this);
         result.merge(doubly_linked_list(rhs));
@@ -125,7 +125,7 @@ namespace lab6 {
         return result;
     }
 
-    // Insert a node before the node located at position
+// Insert a node before the node located at position
     void doubly_linked_list::insert_before(unsigned position, unsigned data) {
         if (!is_valid(position) && position != size)
             throw "Invalid Position";
@@ -150,14 +150,14 @@ namespace lab6 {
         ++size;
     }
 
-    // Insert a node after the node located at position
+// Insert a node after the node located at position
     void doubly_linked_list::insert_after(unsigned position, unsigned data) {
         if (!is_valid(position))
             throw "Invalid Position";
         insert_before(position + 1, data);
     }
 
-    // Remove the node located at position from the linked list
+// Remove the node located at position from the linked list
     void doubly_linked_list::remove(unsigned position) {
         if (!is_valid(position))
             throw "Invalid Position";
@@ -184,7 +184,7 @@ namespace lab6 {
         --size;
     }
 
-    // Split the list with the node being split on being included in the returned list
+// Split the list with the node being split on being included in the returned list
     doubly_linked_list doubly_linked_list::split_before(unsigned position) {
         if (!is_valid(position) && position != size)
             throw "Invalid Position";
@@ -216,15 +216,15 @@ namespace lab6 {
         return split_list;
     }
 
-    // Split the list with the node being split on being included in the retained list
+// Split the list with the node being split on being included in the retained list
     doubly_linked_list doubly_linked_list::split_after(unsigned position) {
         if (!is_valid(position))
             throw "Invalid Position";
         return split_before(position + 1);
     }
 
-    // Create two lists, one starting at position_from and ending with position_to and return that list
-    // Merge the beginning of the original list with the end of the original list and retain it
+// Create two lists, one starting at position_from and ending with position_to and return that list
+// Merge the beginning of the original list with the end of the original list and retain it
     doubly_linked_list doubly_linked_list::split_set(unsigned position_from, unsigned position_to) {
         if (!is_valid(position_from) || !is_valid(position_to) || position_from > position_to)
             throw "invalid positions";
@@ -233,12 +233,12 @@ namespace lab6 {
         return split_list;
     }
 
-    // Swap two nodes in the list. USE POINTERS. Do not just swap the values!
+// Swap two nodes in the list. USE POINTERS. Do not just swap the values!
     void doubly_linked_list::swap(unsigned position1, unsigned position2) {
         swap_set(position1, position1, position2, position2);
     }
 
-    // Swap two sets of cards. The sets are inclusive. USE POINTERS!
+// Swap two sets of cards. The sets are inclusive. USE POINTERS!
     void doubly_linked_list::swap_set(unsigned position1_from, unsigned position1_to, unsigned position2_from,
                                       unsigned position2_to) {
         if (!is_valid(position1_from) || !is_valid(position1_to) || !is_valid(position2_from) ||
@@ -272,7 +272,7 @@ namespace lab6 {
 
     }
 
-    // Overload operator=
+// Overload operator=
     doubly_linked_list &doubly_linked_list::operator=(const doubly_linked_list &RHS) {
         delete this;
         size = RHS.size;
@@ -285,7 +285,7 @@ namespace lab6 {
         return *this;
     }
 
-    // Append the rhs to the end of the this list
+// Append the rhs to the end of the this list
     doubly_linked_list &doubly_linked_list::operator+=(const doubly_linked_list &RHS) {
         *this = *this + RHS;
         return *this;
