@@ -5,10 +5,9 @@ int main() {
     //lab6::deck newdeck = lab6::deck();
     lab7::tree test_tree = lab7::tree();
     test_tree.insert(10);
-    std::cout << test_tree.in_tree(5) << std::endl;
+    std::cout << test_tree.size() << std::endl;
     test_tree.insert(5);
-    std::cout << test_tree.in_tree(5) << std::endl;
-    std::cout << test_tree.level(5) << std::endl;
+
     test_tree.insert(15);
     test_tree.insert(7);
     test_tree.insert(3);
@@ -21,5 +20,6 @@ int main() {
     test_tree.insert(6);
     test_tree.insert(5);
     std::cout << test_tree.level(10) << std::endl;
+    std::cout << test_tree.size() << std::endl;
     return 0;
 }

@@ -6,6 +6,7 @@ namespace lab7 {
     void insert_recursively(node *top, int value);
     int level_recursively(node* top, int key);
     bool in_tree_recursively(node* top, int key);
+    unsigned size_recursively(node* top);
 
     // Construct an empty tree
     tree::tree() {
@@ -46,7 +47,8 @@ namespace lab7 {
 
     // Number of items in the tree
     unsigned tree::size() {
-
+        if( root == nullptr ) return 0;
+        else return size_recursively(root);
     }
 
     // Calculate the depth of the tree, longest string of connections
@@ -113,5 +115,11 @@ namespace lab7 {
         else if(top->data == key) return true;
         else if(key < top->data) return in_tree_recursively(top->left, key);
         else if(key > top->data) return in_tree_recursively(top->right, key);
+    }
+
+    unsigned size_recursively(node* top)
+    {
+        if(top == nullptr) return 0;
+        else return top->frequency + size_recursively(top->left) + size_recursively(top->right);
     }
 }
