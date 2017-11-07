@@ -3,6 +3,7 @@ namespace lab7 {
     void clear(node *to_clear);
 
     void node_print_gtl(node *to_print);
+    void insert_recursively(node *top, int value);
 
     // Construct an empty tree
     tree::tree() {
@@ -16,11 +17,17 @@ namespace lab7 {
 
     // Insert
     void tree::insert(int value) {
-
+        if( root == nullptr ){
+            root = new node(value);
+        }
+        else{
+            insert_recursively(root, value);
+        }
     }
 
     // Remove key
     bool tree::remove(int key) {
+
 
     }
 
@@ -72,5 +79,21 @@ namespace lab7 {
         if (to_clear->left != nullptr) clear(to_clear->left);
         if (to_clear->right != nullptr) clear(to_clear->right);
         delete to_clear;
+    }
+
+    void insert_recursively(node *top, int value)
+    {
+        //if( top == nullptr ) return;
+        if( value > top->data )
+        {
+            if( top->right == nullptr ) top->right = new node(value);
+            else insert_recursively( top->right, value);
+        }
+        else if( value < top->data )
+        {
+            if( top ->left == nullptr ) top->left = new node(value);
+            else insert_recursively(top->left, value);
+        }
+        else if( value == top->data ) top->frequency++;
     }
 }
