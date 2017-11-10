@@ -130,9 +130,13 @@ namespace lab6 {
         if (!is_valid(position) && position != size)
             throw "Invalid Position";
         if (position == 0) {
-            head->prev = new node(data);
-            head->prev->next = head;
-            head = head->prev;
+            if(size == 0){
+                head = tail = new node(data);
+            }else {
+                head->prev = new node(data);
+                head->prev->next = head;
+                head = head->prev;
+            }
         } else if (position == size) {
             tail->next = new node(data);
             tail->next->prev = tail;
