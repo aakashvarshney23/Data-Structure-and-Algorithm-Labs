@@ -108,8 +108,6 @@ namespace lab6 {
 
 // Merge two lists together in place, placing the input list at the end of this list
     void doubly_linked_list::merge(doubly_linked_list rhs) {
-        if ((*this).is_empty() || rhs.is_empty())
-            throw "invalid lists: cannot append empty lists";
         node *rhs_iterator = rhs.head;
         while (rhs_iterator != nullptr) {
             append(rhs_iterator->data);
@@ -266,7 +264,7 @@ namespace lab6 {
 
         doubly_linked_list swap_list1(split_before(position1_from));
         doubly_linked_list sublist1(swap_list1.split_after(position1_to - position1_from));
-        doubly_linked_list swap_list2(sublist1.split_before(position2_from - position1_from - 1));
+        doubly_linked_list swap_list2(sublist1.split_before(position2_from - position1_to - 1));
         doubly_linked_list sublist2(swap_list2.split_after(position2_to - position2_from));
 
         merge(swap_list2);
@@ -278,7 +276,8 @@ namespace lab6 {
 
 // Overload operator=
     doubly_linked_list &doubly_linked_list::operator=(const doubly_linked_list &RHS) {
-        delete this;
+        while (head != nullptr)
+            remove(0);
         size = RHS.size;
         head = tail = new node(RHS.head->data);
         for (node *temp = RHS.head->next; temp != nullptr; temp = temp->next) {

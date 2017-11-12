@@ -86,6 +86,8 @@ EXPECT_EQ(built_tree->in_tree(15), true);
 EXPECT_EQ(built_tree->in_tree(21), false);
 }
 
+int a;
+
 TEST_F(TreeFixture, path_to)
 {
 testing::internal::CaptureStdout();
