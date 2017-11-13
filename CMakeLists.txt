@@ -12,7 +12,7 @@ include_directories(lib/lab04/inc lib/lab06/inc lib/lab07/inc)
 add_subdirectory(lib/lab04 lab4_lib)
 add_subdirectory(lib/lab05 lab5_lib)
 add_subdirectory(lib/lab06 lab6_lib)
-add_subdirectory( lib/lab07 lab7_lib)
+add_subdirectory(lib/lab07 lab7_lib)
 
 
 
