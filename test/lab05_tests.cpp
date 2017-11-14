@@ -98,7 +98,7 @@ TEST_F(Lab05_Fixture, Infix_Postfix_Parsing_Print_Test) {
     testing::internal::CaptureStdout();
     test_expression->print_postfix();
     output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ("1 2 3 + +",output);
+    EXPECT_EQ("1 2 + 3 +",output);
 
     delete test_expression;
     sample_text = "1+   2/3 *(2-1)";
@@ -108,12 +108,12 @@ TEST_F(Lab05_Fixture, Infix_Postfix_Parsing_Print_Test) {
     testing::internal::CaptureStdout();
     test_expression->print_infix();
     output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ( "1 + 2 / 3 * ( 2 - 1 )",output);
+    EXPECT_EQ("1 + 2 / 3 * ( 2 - 1 )",output);
 
     testing::internal::CaptureStdout();
     test_expression->print_postfix();
     output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ("1 2 3 2 1 - * / +",output );
+    EXPECT_EQ("1 2 3 / 2 1 - * +",output );
 
     delete test_expression;
     sample_text = "12+   2234/23 *(212-13)";
@@ -128,7 +128,7 @@ TEST_F(Lab05_Fixture, Infix_Postfix_Parsing_Print_Test) {
     testing::internal::CaptureStdout();
     test_expression->print_postfix();
     output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ("12 2234 23 212 13 - * / +",output);
+    EXPECT_EQ("12 2234 23 / 212 13 - * +",output);
 }
 
 
