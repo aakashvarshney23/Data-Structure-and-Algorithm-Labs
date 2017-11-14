@@ -108,10 +108,10 @@ namespace lab4 {
     {
         node * tmp = this;
         while (tmp != nullptr){
-            std::cout << tmp ->data << "->" ;
+            std::cout << tmp ->data << " -> " ;
             tmp = tmp->next;
         }
-        std::cout << "null" << std::endl;
+        std::cout << "null" << std::flush;
     }
 
     //Print the middle node
@@ -123,7 +123,7 @@ namespace lab4 {
             slow=slow->next;
             fast=fast->next->next;
         }
-        std::cout << slow->data << std::endl;
+        std::cout << slow->data << std::flush;
         // HINT: Use a runner to traverse through the linked list at two different rates, 1 node per step
         //       and two nodes per step. When the faster one reaches the end, the slow one should be
         //       pointing to the middle
