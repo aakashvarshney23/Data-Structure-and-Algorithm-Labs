@@ -10,14 +10,12 @@ protected:
     }
 
     virtual void SetUp() {
-        test_num=1;
-        test_numbers=std::vector<unsigned>({1,2,3,4,5,6,7,8,9,10});
-        Lposition = test_numbers.begin();
-        Rposition = test_numbers.end();
-        list1 =new lab6::doubly_linked_list;
-        list2 =new lab6::doubly_linked_list(test_num);
-        list3 = new lab6::doubly_linked_list(test_numbers);
-        list4= new lab6::doubly_linked_list(*list3);
+        unsorted_numbers=std::vector<unsigned>({72, 96, 26, 94, 33,  2, 42,
+                                                 89, 41, 36, 63, 65, 56, 16,
+                                                 17, 59, 35, 39, 40,  1, 69});
+        Lposition = unsorted_numbers.begin();
+        Rposition = unsorted_numbers.end();
+        unsorted_list = new lab6::doubly_linked_list(unsorted_numbers);
     }
 
 public:
@@ -27,24 +25,70 @@ public:
     virtual ~Lab8_Tests() {
 
     }
-    lab6::doubly_linked_list * list1, *list2, *list3, *list4;
-    std::vector <unsigned> test_numbers;
-    unsigned test_num;
+    sorts sorting_machine;
+    lab6::doubly_linked_list *unsorted_list;
+    std::vector <unsigned> unsorted_numbers;
     std::vector<unsigned>::iterator Lposition, Rposition;
-
 };
-TEST_F(Lab8_Tests, construct_with_check_size){
-    EXPECT_EQ(list1->get_size(), 0);
-    EXPECT_EQ(list2->get_size(),1);
-    EXPECT_EQ(list3->get_size(),test_numbers.size());
-    EXPECT_EQ(list4->get_size(),list3->get_size());
+
+
+TEST_F(Lab8_Tests, insertion_sort){
+    // First iteration through insertion sort
+    // Nothing should change because the first two numbers are already sorted
+    std::vector<unsigned> sorted_vec_1 = std::vector<unsigned>({72, 96, 26, 94, 33,  2, 42,
+                                                                  89, 41, 36, 63, 65, 56, 16,
+                                                                  17, 59, 35, 39, 40,  1, 69});
+    lab6::doubly_linked_list *sorted1 = new lab6::doubly_linked_list(sorted_vec_1);
+    EXPECT_EQ(sorting_machine.insertion_sort(*unsorted_list,1), &sorted1);
+
+
+    // 5th pass through insertion sort
+    // First 6 numbers should be sorted now
+    std::vector<unsigned> sorted_vec_5 = std::vector<unsigned>({ 2, 26, 33, 72, 94, 96, 42,
+                                                                  89, 41, 36, 63, 65, 56, 16,
+                                                                  17, 59, 35, 39, 40,  1, 69});
+    lab6::doubly_linked_list *sorted5 = new lab6::doubly_linked_list(sorted_vec_5);
+    EXPECT_EQ(sorting_machine.insertion_sort(*unsorted_list,5), &sorted5);
+
+    // 10th pass through insertion sort
+    // First 11 numbers should be sorted now
+    std::vector<unsigned> sorted_vec_10 = std::vector<unsigned>({ 2, 26, 33, 36, 41, 42, 63,
+                                                                   72, 89, 94, 96, 65, 56, 16,
+                                                                   17, 59, 35, 39, 40,  1, 69});
+    lab6::doubly_linked_list *sorted10 = new lab6::doubly_linked_list(sorted_vec_10);
+    EXPECT_EQ(sorting_machine.insertion_sort(*unsorted_list,10), &sorted10);
+
+    // 20th pass through insertion sort
+    // All numbers should be sorted now
+    std::vector<unsigned> sorted_vec_20 = std::vector<unsigned>({ 1,  2, 16, 17, 26, 33, 35,
+                                                                   36, 39, 40, 41, 42, 56, 59,
+                                                                   63, 65, 69, 72, 89, 94, 96});
+    lab6::doubly_linked_list *sorted20 = new lab6::doubly_linked_list(sorted_vec_20);
+    EXPECT_EQ(sorting_machine.insertion_sort(*unsorted_list,20), &sorted20);
+
+    // 25th pass through insertion sort
+    // All numbers should be sorted now
+    std::vector<unsigned> sorted_vec_25 = std::vector<unsigned>({ 1,  2, 16, 17, 26, 33, 35,
+                                                                   36, 39, 40, 41, 42, 56, 59,
+                                                                   63, 65, 69, 72, 89, 94, 96});
+    lab6::doubly_linked_list *sorted25 = new lab6::doubly_linked_list(sorted_vec_25);
+    EXPECT_EQ(sorting_machine.insertion_sort(*unsorted_list,20), &sorted25);
+
+    // Delete all doubly linked lists used for testing
+    delete sorted1, sorted5, sorted10, sorted20, sorted25;
 }
 
-//unsure how to test destructor
+TEST_F(Lab8_Tests, selection_sort){
+}
 
-TEST_F(Lab8_Tests, getters){
-    //EXPECT_EQ(list1,); need exception handling: ASSERT_THROW()?
-    EXPECT_EQ(list2->get_data(0),test_num);
-    EXPECT_EQ(list3->get_data(4),test_numbers[4]);//could check list in a loop
-    EXPECT_EQ(list3->get_set(2,5),std::vector<unsigned>(Lposition+2,Lposition+6));
+TEST_F(Lab8_Tests, bubble_sort){
+}
+
+TEST_F(Lab8_Tests, cocktail_sort){
+}
+
+TEST_F(Lab8_Tests, merge_sort){
+}
+
+TEST_F(Lab8_Tests, quick_sort){
 }
