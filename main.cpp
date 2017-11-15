@@ -1,42 +1,22 @@
 #include "lib/lab06/inc/deck.h"
 #include "lib/lab07/inc/tree.h"
+#include "lib/lab08/inc/sorts.h"
 
 int main() {
-    //lab6::deck newdeck = lab6::deck();
-    lab7::tree test_tree = lab7::tree();
-    std::cout << test_tree.depth() << std::endl;
-    test_tree.insert(10);
-    std::cout << test_tree.depth() << std::endl;
-    std::cout << test_tree.size() << std::endl;
-    test_tree.insert(5);
-    std::cout << test_tree.depth() << std::endl;
-    test_tree.print();
-    test_tree.insert(15);
-    test_tree.insert(7);
-    test_tree.insert(3);
-    test_tree.insert(2);
-    test_tree.insert(1);
-    std::cout << test_tree.level(1) << std::endl;
-    test_tree.path_to(1);
-    test_tree.insert(4);
-    test_tree.insert(9);
-    test_tree.insert(8);
-    test_tree.insert(6);
-    test_tree.insert(5);
-    test_tree.print();
-    test_tree.remove(5);
-    test_tree.print();
-    test_tree.remove(5);
-    test_tree.print();
-    test_tree.remove(10);
-    test_tree.print();
-    test_tree.path_to(8);
-    std::cout << test_tree.level(10) << std::endl;
-    std::cout << test_tree.size() << std::endl;
-    std::cout << test_tree.get_frequency(5) << std::endl;
-    std::cout << test_tree.get_frequency(11) << std::endl;
-    std::cout << test_tree.depth() << std::endl;
-    test_tree.print();
-    test_tree.print_gtl();
-    return 0;
+    sorts sorting_machine;
+    lab6::doubly_linked_list *unsorted_list;
+    std::vector <unsigned> unsorted_numbers;
+    std::vector<unsigned>::iterator Lposition, Rposition;
+    unsorted_numbers=std::vector<unsigned>({72, 96, 26, 94, 33,  2, 42,
+                                            89, 41, 36, 63, 65, 56, 16,
+                                            17, 59, 35, 39, 40,  1, 69});
+    Lposition = unsorted_numbers.begin();
+    Rposition = unsorted_numbers.end();
+    unsorted_list = new lab6::doubly_linked_list(unsorted_numbers);
+
+    lab6::doubly_linked_list *test_list = new lab6::doubly_linked_list();
+
+    *test_list = sorting_machine.insertion_sort(*unsorted_list, 20);
+    int a = 1;
+    return 1;
 }
