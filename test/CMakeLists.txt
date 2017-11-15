@@ -6,7 +6,8 @@ add_executable(runBasicTests
         lab06_tests.cpp
         lab07_tests.cpp
         lab05_tests.cpp
-        lab04_tests.cpp)
+        lab04_tests.cpp
+        lab08_tests.cpp)
 
 add_subdirectory(lib/gtest-1.7.0)
 

@@ -9,7 +9,6 @@ namespace lab5 {
         queue infix;
         queue postfix;
 
-
         void convert_to_postfix(std::string &input_expression);
         void parse_to_infix(std::string &input_expression);
     public:

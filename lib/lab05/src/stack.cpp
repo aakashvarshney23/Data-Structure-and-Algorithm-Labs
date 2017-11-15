@@ -2,18 +2,18 @@
 #include "../inc/stack.h"
 
 namespace lab5 {
-    stack::stack():head(nullptr), size(0) {}
+    stack::stack() : head(nullptr), size(0) {}
 
     stack::stack(std::string &data) {
         head = new node(data);
-        size =1;
+        size = 1;
     }
 
     stack::stack(const stack &original) {
-        if (original.head!= nullptr) {
+        if (original.head != nullptr) {
             node *original_tmp = original.head;
             node *tmp = head = new node(original_tmp->data);
-            size=original.size;
+            size = original.size;
 
             original_tmp = original_tmp->next;
             while (original_tmp != nullptr) {
@@ -21,31 +21,30 @@ namespace lab5 {
                 tmp = tmp->next;
                 original_tmp = original_tmp->next;
             }
-        }else {
+        } else {
             head = nullptr;
             size = 0;
         }
     }
 
     stack::~stack() {
-        while(head != nullptr)
+        while (head != nullptr)
             pop();
     }
 
     stack &stack::operator=(const stack &RHS) {
 
-        if(this != &RHS)
-        {
-            if (head!= nullptr)
+        if (this != &RHS) {
+            if (head != nullptr)
                 delete this;
-            if (RHS.head!= nullptr) {
+            if (RHS.head != nullptr) {
                 node *RHS_tmp = RHS.head;
                 node *tmp = head = new node(RHS_tmp->data);
                 size = RHS.size;
                 RHS_tmp = RHS_tmp->next;
                 while (RHS_tmp != nullptr) {
-                    tmp->next=new node(RHS_tmp->data);
-                    tmp=tmp->next;
+                    tmp->next = new node(RHS_tmp->data);
+                    tmp = tmp->next;
                     RHS_tmp = RHS_tmp->next;
                 }
             }
@@ -54,7 +53,7 @@ namespace lab5 {
     }
 
     bool stack::isEmpty() const {
-        return size==0;
+        return size == 0;
     }
 
     unsigned stack::stackSize() const {
@@ -66,21 +65,16 @@ namespace lab5 {
     }
 
     void stack::push(std::string &data) {
-        node *temp = new node(data);
-        temp->next = head;
-        head = temp;
-        ++size;
+        //step 1 store address of current top node (pointed to by head) in a node*
+        //step 2 create a new node with the incoming data variable, storing the address of this node in head pointer
+        //step 3 update new nodes next pointer with the address stored in step 1
+        //step 4 update size of stack variable
     }
 
     void stack::pop() {
-        if(head!= nullptr) {
-            node *temp = head;
-            head = head->next;
-            delete temp;
-            --size;
-        }
-        else {
-            std::cout << "ERROR: list is empty" << std::endl;
-        }
+        //step 1 store address of current top node (pointed to by head) in a node*
+        //step 2 update head with address of second node
+        //step 3 delete node pointed to by address stored in step 1
+        // step 4 update size of stack variable
     }
 }
