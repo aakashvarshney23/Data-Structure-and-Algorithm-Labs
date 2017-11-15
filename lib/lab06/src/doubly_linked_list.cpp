@@ -1,4 +1,4 @@
-#include "../inc/doubly_linked_list.h"
+#include "doubly_linked_list.h"
 /*
  * You will be writing all of the code for each of these functions.
  * Remember, this is a doubly linked list, not an array. You need to
@@ -79,7 +79,7 @@ namespace lab6 {
 
     // Allow for the merging of two lists using the + operator.
     doubly_linked_list doubly_linked_list::operator+(const doubly_linked_list &rhs) const {
-    //    return ;
+        //    return ;
     }
 
     // Insert a node before the node located at position
@@ -99,18 +99,18 @@ namespace lab6 {
 
     // Split the list with the node being split on being included in the returned list
     doubly_linked_list doubly_linked_list::split_before(unsigned position) {
-    //    return ;
+        //    return ;
     }
 
     // Split the list with the node being split on being included in the retained list
     doubly_linked_list doubly_linked_list::split_after(unsigned position) {
-    //    return ;
+        //    return ;
     }
 
     // Create two lists, one starting at position_from and ending with position_to and return that list
     // Merge the beginning of the original list with the end of the original list and retain it
     doubly_linked_list doubly_linked_list::split_set(unsigned position_from, unsigned position_to) {
-    //    return ;
+        //    return ;
     }
 
     // Swap two nodes in the list. USE POINTERS. Do not just swap the values!
@@ -126,12 +126,12 @@ namespace lab6 {
 
     // Overload operator=
     doubly_linked_list &doubly_linked_list::operator=(const doubly_linked_list &RHS) {
-    //    return <#initializer#>;
+        //    return <#initializer#>;
     }
 
     // Append the rhs to the end of the this list
     doubly_linked_list &doubly_linked_list::operator+=(const doubly_linked_list &RHS) {
-    //    return <#initializer#>;
+        //    return <#initializer#>;
     }
 
     unsigned doubly_linked_list::get_size() {
@@ -140,5 +140,31 @@ namespace lab6 {
 
     bool doubly_linked_list::is_empty() {
         return !size;
+    }
+
+    bool doubly_linked_list::operator==(const doubly_linked_list &rhs) const {
+        node * iterL=head, * iterR = rhs.head;
+        while(iterL!= nullptr && iterR!= nullptr){
+            if (iterL->data != iterR->data)
+                return false;
+            iterL = iterL->next;
+            iterR = iterR->next;
+        }
+        return iterL == nullptr && iterR == nullptr;
+    }
+
+    std::string doubly_linked_list::to_string() {
+        if(!head) return "";
+        else {
+            std::string output = "";
+            output += std::to_string(head->data);
+            node *to_return = head->next;
+            while (to_return) {
+                output += ", ";
+                output += std::to_string(to_return->data);
+                to_return = to_return->next;
+            }
+            return output;
+        }
     }
 }

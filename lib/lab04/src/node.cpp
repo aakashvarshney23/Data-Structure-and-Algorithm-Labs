@@ -1,4 +1,5 @@
 #include "node.h"
+#include <iostream>
 
 namespace lab4 {
     // Take in value and create a node

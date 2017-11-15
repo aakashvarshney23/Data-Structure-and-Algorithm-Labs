@@ -4,9 +4,6 @@
 
 class TreeFixture : public ::testing::Test {
 protected:
-    virtual void TearDown() {
-    }
-
     virtual void SetUp() {
         test_numbers=std::vector<unsigned>({12,8,14,15,18,16,17,19,22,20,4,10,9,13,11,5,7,6,2,1,3});
         tree = new lab7::tree();
@@ -16,12 +13,6 @@ protected:
     }
 
 public:
-    TreeFixture() : Test() {
-    }
-
-    virtual ~TreeFixture() {
-
-    }
     lab7::tree *tree, *built_tree;
     std::vector <unsigned> test_numbers;
 

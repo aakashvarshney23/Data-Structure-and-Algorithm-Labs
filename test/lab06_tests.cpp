@@ -8,9 +8,6 @@
 
 class Lab06_Fixture : public ::testing::Test {
 protected:
-    virtual void TearDown() {
-    }
-
     virtual void SetUp() {
         test_num=1;
         test_numbers=std::vector<unsigned>({0,1,2,3,4,5,6,7,8,9});
@@ -23,17 +20,10 @@ protected:
     }
 
 public:
-    Lab06_Fixture() : Test() {
-    }
-
-    virtual ~Lab06_Fixture() {
-
-    }
     lab6::doubly_linked_list * list1, *list2, *list3, *list4;
     std::vector <unsigned> test_numbers;
     unsigned test_num;
     std::vector<unsigned>::iterator Lposition, Rposition;
-
 };
 TEST_F(Lab06_Fixture, construct_with_check_size) {
     EXPECT_EQ(0, list1->get_size());
