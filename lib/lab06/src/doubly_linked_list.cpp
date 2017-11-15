@@ -316,4 +316,19 @@ namespace lab6 {
         }
         return iterL == nullptr && iterR == nullptr;
     }
+
+    std::string doubly_linked_list::to_string() {
+        if(!head) return "";
+        else {
+            std::string output = "";
+            output += std::to_string(head->data);
+            node *to_return = head->next;
+            while (to_return) {
+                output += ", ";
+                output += std::to_string(to_return->data);
+                to_return = to_return->next;
+            }
+            return output;
+        }
+    }
 }

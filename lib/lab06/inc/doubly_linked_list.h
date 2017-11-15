@@ -41,8 +41,9 @@ namespace lab6 {
         doubly_linked_list &operator=(const doubly_linked_list& RHS);
         doubly_linked_list &operator+=(const doubly_linked_list& RHS);
 
+        //Added and provided for you for lab 8
         bool operator==(const doubly_linked_list& rhs)const;
-
+        std::string to_string();
     };
 }
 

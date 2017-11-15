@@ -16,7 +16,8 @@ int main() {
 
     lab6::doubly_linked_list *test_list = new lab6::doubly_linked_list();
 
-    *test_list = sorting_machine.insertion_sort(*unsorted_list, 20);
+    *test_list = sorting_machine.insertion_sort(*unsorted_list, 30);
+    std::string test_string = test_list->to_string();
     int a = 1;
     return 1;
 }
