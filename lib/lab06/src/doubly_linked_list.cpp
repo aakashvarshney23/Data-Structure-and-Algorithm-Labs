@@ -305,4 +305,15 @@ namespace lab6 {
     bool doubly_linked_list::is_valid(unsigned position) {
         return (position >= 0 && position < size);
     }
+
+    bool doubly_linked_list::operator==(const doubly_linked_list &rhs) const {
+        node * iterL=head, * iterR = rhs.head;
+        while(iterL!= nullptr && iterR!= nullptr){
+            if (iterL->data != iterR->data)
+                return false;
+            iterL = iterL->next;
+            iterR = iterR->next;
+        }
+        return iterL == nullptr && iterR == nullptr;
+    }
 }

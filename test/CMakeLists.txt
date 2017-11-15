@@ -11,6 +11,6 @@ add_executable(runBasicTests
 add_subdirectory(lib/gtest-1.7.0)
 
 target_link_libraries(runBasicTests gtest gtest_main)
-target_link_libraries(runBasicTests lab4_lib lab5_lib lab6_lib lab7_lib)
+target_link_libraries(runBasicTests lab4_lib lab5_lib lab6_lib lab7_lib lab8_lib)
 
 

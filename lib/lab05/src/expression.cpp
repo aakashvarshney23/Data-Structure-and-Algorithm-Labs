@@ -32,7 +32,7 @@ namespace lab5 {
                 if (operator_stack.isEmpty() || equation_item[0] == '(') {
                     operator_stack.push(equation_item);
                 } else if (equation_item[0] != ')') {
-                    while (!operator_stack.isEmpty() && (operator_precedence(equation_item) <
+                    while (!operator_stack.isEmpty() && (operator_precedence(equation_item) <=
                                                          operator_precedence(operator_stack.top()))) {
                         tmp_item = operator_stack.top();
                         postfix.enqueue(tmp_item);

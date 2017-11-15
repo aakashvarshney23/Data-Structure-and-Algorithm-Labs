@@ -39,7 +39,7 @@ TEST_F(Lab8_Tests, insertion_sort){
                                                                   89, 41, 36, 63, 65, 56, 16,
                                                                   17, 59, 35, 39, 40,  1, 69});
     lab6::doubly_linked_list *sorted1 = new lab6::doubly_linked_list(sorted_vec_1);
-    EXPECT_EQ(sorting_machine.insertion_sort(*unsorted_list,1), &sorted1);
+    EXPECT_EQ(sorting_machine.insertion_sort(*unsorted_list,1), *sorted1);
 
 
     // 5th pass through insertion sort
@@ -48,7 +48,7 @@ TEST_F(Lab8_Tests, insertion_sort){
                                                                   89, 41, 36, 63, 65, 56, 16,
                                                                   17, 59, 35, 39, 40,  1, 69});
     lab6::doubly_linked_list *sorted5 = new lab6::doubly_linked_list(sorted_vec_5);
-    EXPECT_EQ(sorting_machine.insertion_sort(*unsorted_list,5), &sorted5);
+    EXPECT_EQ(sorting_machine.insertion_sort(*unsorted_list,5), *sorted5);
 
     // 10th pass through insertion sort
     // First 11 numbers should be sorted now
@@ -56,7 +56,7 @@ TEST_F(Lab8_Tests, insertion_sort){
                                                                    72, 89, 94, 96, 65, 56, 16,
                                                                    17, 59, 35, 39, 40,  1, 69});
     lab6::doubly_linked_list *sorted10 = new lab6::doubly_linked_list(sorted_vec_10);
-    EXPECT_EQ(sorting_machine.insertion_sort(*unsorted_list,10), &sorted10);
+    EXPECT_EQ(sorting_machine.insertion_sort(*unsorted_list,10), *sorted10);
 
     // 20th pass through insertion sort
     // All numbers should be sorted now
@@ -64,7 +64,7 @@ TEST_F(Lab8_Tests, insertion_sort){
                                                                    36, 39, 40, 41, 42, 56, 59,
                                                                    63, 65, 69, 72, 89, 94, 96});
     lab6::doubly_linked_list *sorted20 = new lab6::doubly_linked_list(sorted_vec_20);
-    EXPECT_EQ(sorting_machine.insertion_sort(*unsorted_list,20), &sorted20);
+    EXPECT_EQ(sorting_machine.insertion_sort(*unsorted_list,20), *sorted20);
 
     // 25th pass through insertion sort
     // All numbers should be sorted now
@@ -72,7 +72,7 @@ TEST_F(Lab8_Tests, insertion_sort){
                                                                    36, 39, 40, 41, 42, 56, 59,
                                                                    63, 65, 69, 72, 89, 94, 96});
     lab6::doubly_linked_list *sorted25 = new lab6::doubly_linked_list(sorted_vec_25);
-    EXPECT_EQ(sorting_machine.insertion_sort(*unsorted_list,20), &sorted25);
+    EXPECT_EQ(sorting_machine.insertion_sort(*unsorted_list,20), *sorted25);
 
     // Delete all doubly linked lists used for testing
     delete sorted1, sorted5, sorted10, sorted20, sorted25;
