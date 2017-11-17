@@ -1,4 +1,4 @@
-This is the repository for all of the labs in CMPE 126. The source code and instructrions for each of these labs is located in the `lib` folder.
+This is the repository for all of the labs in CMPE 126. The source code and instructions for each of these labs is located in the `lib` folder.
 
 ### Labs ###
 * **Lab 4:** Linked List

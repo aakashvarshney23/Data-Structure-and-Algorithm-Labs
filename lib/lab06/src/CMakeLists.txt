@@ -7,7 +7,6 @@ set(HEADER_FILES
         )
 
 set(SOURCE_FILES
-        doubly_linked_list.cpp
         deck.cpp
         )
 

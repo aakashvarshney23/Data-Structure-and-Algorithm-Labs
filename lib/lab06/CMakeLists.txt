@@ -7,9 +7,8 @@ set(HEADER_FILES
         )
 
 set(SOURCE_FILES
-        src/doubly_linked_list.cpp
         src/deck.cpp
-        )
+        src/doubly_linked_list.cpp)
 include_directories(inc)
 add_library(lab6_lib STATIC ${SOURCE_FILES} ${HEADER_FILES})
 
