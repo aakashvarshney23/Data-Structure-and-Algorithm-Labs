@@ -4,4 +4,5 @@ This is the repository for all of the labs in CMPE 126. The source code and inst
 * **Lab 4:** Linked List
 * **Lab 5:** Stack and Queue
 * **Lab 6:** Doubly Linked List
-* **Lab 7:** Tree 
+* **Lab 7:** Tree
+* **Lab 8:** Sorting 
