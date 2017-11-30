@@ -35,7 +35,7 @@ public:
 };
 
 
-TEST_F(Lab8_Tests, insertion_sort) {
+TEST_F(Lab8_Tests,DISABLED_insertion_sort) {
     std::string sorted0  = "72, 96, 26, 94, 33, 2, 42, 89, 41, 36, 63, 65, 56, 16, 17, 59, 35, 39, 40, 1, 69";
     std::string sorted1  = "72, 96, 26, 94, 33, 2, 42, 89, 41, 36, 63, 65, 56, 16, 17, 59, 35, 39, 40, 1, 69";
     std::string sorted5  = "2, 26, 33, 72, 94, 96, 42, 89, 41, 36, 63, 65, 56, 16, 17, 59, 35, 39, 40, 1, 69";

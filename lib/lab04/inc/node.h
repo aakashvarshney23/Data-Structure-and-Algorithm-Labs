@@ -3,11 +3,10 @@
 
 namespace lab4 {
     class node {
-    private:
+    public:
         node *next;
         int data;
 
-    public:
         node();
 
         node(int input);

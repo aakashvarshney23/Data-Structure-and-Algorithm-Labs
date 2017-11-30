@@ -17,13 +17,15 @@ public:
     std::vector <unsigned> test_numbers;
 
 };
-TEST_F(TreeFixture, construct_with_check_size) {
+TEST_F(TreeFixture, construct_with_check_size)
+{
 EXPECT_EQ(tree->size(), 0);
 EXPECT_EQ(tree->depth(), 0);
 }
 
 TEST_F(TreeFixture, depth)
 {
+
 EXPECT_EQ(built_tree->depth(), 6);
 built_tree->insert(4);
 EXPECT_EQ(built_tree->depth(), 6);

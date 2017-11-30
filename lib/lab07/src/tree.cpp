@@ -1,8 +1,12 @@
 #include "../inc/tree.h"
 #include <iostream>
 
-namespace lab7 {void clear(node* to_clear);
-void node_print_gtl(node* to_print);
+using namespace std;
+
+namespace lab7 {
+    void clear(node *to_clear);
+
+    void node_print_gtl(node *to_print);
 
     // Construct an empty tree
     tree::tree() {
@@ -17,16 +21,140 @@ void node_print_gtl(node* to_print);
     // Insert
     void tree::insert(int value) {
 
-addLeaf(value, root);}
+        addLeaf(value, root);
+    }
 
     // Remove key
     bool tree::remove(int key) {
-        removeNode(key, root);
+        node *temp1, *temp2, *temp3, *temp4, *temp5;
+        temp1 = temp2 = temp3 = temp4 = root;
+        temp5 = nullptr;
+
+        if(root->data == key && root->frequency > 1)
+        {
+            root->frequency--;
+            return true;
+        }
+
+        else if(root->data == key && root->frequency <= 1)
+        {
+            if (temp1->left != nullptr)
+            {
+                temp1 = temp1->left;
+                temp3 = temp3->left;
+                temp4 = temp4->right;
+
+                while (temp1->right != nullptr)
+                {
+                    temp2 = temp1;
+                    temp1 = temp1->right;
+                }
+                if (temp1->left != nullptr)
+                {
+                    temp5 = temp1->left;
+                    temp1 = temp1->right;
+                }
+                temp2->right = temp5;
+                root = temp1;
+                root->right = temp4;
+                root->left = temp3;
+                return true;
+            }
+
+            else if (temp1->right != nullptr)
+            {
+                temp1 = temp1->right;
+                temp3 = temp3->left;
+                temp4 = temp4->right;
+
+                while (temp1->left != nullptr)
+                {
+                    temp2 = temp1;
+                    temp1 = temp1->left;
+                }
+                if (temp1->right != nullptr)
+                {
+                    temp5 = temp1->right;
+                    temp1 = temp1->left;
+                }
+                temp2->left = temp5;
+                root = temp1;
+                root->right = temp4;
+                root->left = temp3;
+                return true;
+            }
+        }
+
+        while (true) {
+
+            if((temp1->data == key) && (temp1->frequency > 1))
+            {
+                temp1->frequency--;
+                return true;
+            }
+
+            if (temp1->left != nullptr && temp1->data > key)
+            {
+                temp2 = temp1;
+                temp1 = temp1->left;
+            }
+
+            else if (temp1->right != nullptr && temp1->data < key)
+            {
+                temp2 = temp1;
+                temp1 = temp1->right;
+            }
+
+            else if ((temp1->data == key) && (temp1->right != nullptr) && (temp2->right == temp1))
+            {
+                temp2->right = temp1->right;
+                temp2 = temp2->right;
+                temp2->left = temp1->left;
+                return true;
+            }
+
+            else if ((temp1->data == key) && (temp1->right != nullptr) && (temp2->left == temp1))
+            {
+                temp2->left = temp1->right;
+                temp2 = temp2->left;
+                temp2->left = temp1->left;
+                return true;
+            }
+
+            else if ((temp1->data == key) && (temp1->right == nullptr) && (temp1->left != nullptr) && (temp2->right == temp1))
+            {
+                temp2->right = temp1->left;
+                return true;
+            }
+
+            else if ((temp1->data == key) && (temp1->right == nullptr) && (temp1->left != nullptr) && (temp2->left == temp1))
+            {
+                temp2->left = temp1->left;
+                return true;
+            }
+
+            else if ((temp1->data == key) && (temp1->right == nullptr) && (temp1->left == nullptr) && (temp2->right == temp1))
+            {
+                temp2->right = nullptr;
+                return true;
+            }
+
+            else if ((temp1->data == key) && (temp1->right == nullptr) && (temp1->left == nullptr) && (temp2->left == temp1))
+            {
+                temp2->left = nullptr;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
     // What level is key on?
     int tree::level(int key) {
-        getLevelUtil(root, key, 1);
+        int a = getLevelUtil(root, key, 1);
+        return a - 1;
     }
 
     // Print the path to the key, starting with root
@@ -35,18 +163,27 @@ addLeaf(value, root);}
         bool found = false;
         if (current == nullptr) {
             std::cout << "Empty tree " << std::endl;
-        } else {
+        } else if (get_frequency(key) >= 1) {
             while (current != nullptr && !found) {
-                std::cout << current->data << "->";
+                std::cout << current->data;
+                if (current->data != key)
+                    std::cout << " -> ";
                 if (current->data == key) {
                     found = true;
+                    std::cout << endl;
+
                 } else if (current->data > key) {
                     current = current->left;
-                } else {
+                }
+//
+                else {
                     current = current->right;
                 }
+
             }
+
         }
+
     }
 
     // Number of items in the tree
@@ -56,7 +193,12 @@ addLeaf(value, root);}
 
     // Calculate the depth of the tree, longest string of connections
     unsigned tree::depth() {
-        maxDepth(root);
+        //  maxDepth(root);
+        int a = maxDepth(root);
+        if (a == 0)
+            return 0;
+        else
+            return a - 1;
 
     }
 
@@ -77,18 +219,22 @@ addLeaf(value, root);}
     // Print the tree least to greatest, Include duplicates
     void tree::print() {
         printInOrder(root);
+        cout << endl;
     }
 
-void tree::print_gtl(){
-    node_print_gtl(root);
+    void tree::print_gtl() {
+        node_print_gtl(root);
         std::cout << std::endl;
-}
+    }
 
-void node_print_gtl(node* top){
-    if(top == nullptr) return;
-node_print_gtl(top->right);
-        for(int i = 0; i < top->frequency; i++) std::cout << top->data << " ";
+    void node_print_gtl(node *top) {
+        if (top == nullptr) return;
+        node_print_gtl(top->right);
+        for (int i = 0; i < top->frequency; i++) std::cout << top->data << " ";
         node_print_gtl(top->left);
+
+        //missing code
+    }
 
     void clear(node *to_clear) {
         if (to_clear == nullptr) return;
@@ -98,19 +244,25 @@ node_print_gtl(top->right);
     }
 
     void tree::addLeaf(int value, node *ptr) {
-        if (root == nullptr)
+        if (root == nullptr) {
             root = new node(value);
-        else if (value < ptr->data) {
+        } else if (value == ptr->data) {
+            ptr->frequency++;
+        } else if (value < ptr->data) {
             if (ptr->left != nullptr)
                 addLeaf(value, ptr->left);
-            else
+            else {
                 ptr->left = new node(value);
+            }
         } else if (value > ptr->data) {
             if (ptr->right != nullptr)
                 addLeaf(value, ptr->right);
-            else
+            else {
                 ptr->right = new node(value);
+            }
         }
+
+
     }
 
     void tree::printInOrder(node *ptr) {
@@ -118,12 +270,17 @@ node_print_gtl(top->right);
             if (ptr->left != nullptr) {
                 printInOrder(ptr->left);
             }
-            cout << ptr->data << " ";
+            if (frequency(root, ptr->data) > 1) {
+                for (int i = 0; i < frequency(root, ptr->data); i++)
+                    cout << ptr->data << " ";
+            } else if (frequency(root, ptr->data) == 1)
+                cout << ptr->data << " ";
+
             if (ptr->right != nullptr) {
                 printInOrder(ptr->right);
             }
         } else
-            cout << "The tree is empty" << endl;
+            cout << "The tree is empty";
     }
 
     void tree::removeNode(int key, node *ptr) {
@@ -215,10 +372,15 @@ node_print_gtl(top->right);
     }
 
     int tree::size(node *ptr) {
+
         if (ptr == nullptr)
             return 0;
-        else
-            return (size(ptr->left) + 1 + size(ptr->right));
+        else {
+            int count = ptr->frequency;
+            count += size(ptr->left);
+            count += size(ptr->right);
+            return count;
+        }
     }
 
     int tree::maxDepth(node *node) {
@@ -253,15 +415,16 @@ node_print_gtl(top->right);
 
 /* Returns level of given data value */
     int tree::frequency(node *ptr, int key) {
-        int count = 0;
-        ptr = root;
-        if (ptr->data == key && ptr != nullptr)
-            count++;
-        else if (key < ptr->data) {
-            frequency(ptr->left, key);
-        } else if (key > ptr->data) {
-            frequency(ptr->right, key);
-        }
-        return count;
+        int next;
+
+        if (ptr == nullptr)
+            return 0;
+        if (ptr->data == key)
+            return ptr->frequency;;
+
+        next = frequency(ptr->left, key);
+        if (next != 0)
+            return next;
+        next = frequency(ptr->right, key);
     }
 }
