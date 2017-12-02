@@ -2,6 +2,7 @@
 #define CMPE126F17_LABS_SORTS_H
 
 #include "doubly_linked_list.h"
+#include "node.h"
 
 class sorts{
 public:

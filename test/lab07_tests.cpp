@@ -2,6 +2,7 @@
 
 #include "../lib/lab07/inc/tree.h"
 
+
 class TreeFixture : public ::testing::Test {
 protected:
     virtual void SetUp() {

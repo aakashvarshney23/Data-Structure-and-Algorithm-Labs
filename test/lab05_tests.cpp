@@ -11,7 +11,7 @@ public:
     lab5::queue * test_queue;
 };
 
-TEST_F(Lab05_Fixture, Pop_Push_Test) {
+TEST_F(Lab05_Fixture, DISABLED_Pop_Push_Test) {
     test_stack=new lab5::stack;
     EXPECT_EQ(true,test_stack->isEmpty());
     std::string sample_string;
@@ -48,7 +48,7 @@ TEST_F(Lab05_Fixture, Pop_Push_Test) {
     EXPECT_EQ(true,test_stack->isEmpty());
 }
 
-TEST_F(Lab05_Fixture, queue_enqueue_test) {
+TEST_F(Lab05_Fixture, DISABLED_queue_enqueue_test) {
     test_queue=new lab5::queue;
     EXPECT_EQ(true,test_queue->isEmpty());
     std::string sample_string,front_string;
@@ -85,7 +85,7 @@ TEST_F(Lab05_Fixture, queue_enqueue_test) {
     EXPECT_EQ(true,test_queue->isEmpty());
 }
 
-TEST_F(Lab05_Fixture, Infix_Postfix_Parsing_Print_Test) {
+TEST_F(Lab05_Fixture, DISABLED_Infix_Postfix_Parsing_Print_Test) {
     std::string output;
     std::string sample_text="1+2+3";
     test_expression = new lab5::expression(sample_text);
@@ -132,7 +132,7 @@ TEST_F(Lab05_Fixture, Infix_Postfix_Parsing_Print_Test) {
 }
 
 
-TEST_F(Lab05_Fixture, istream_test) {
+TEST_F(Lab05_Fixture, DISABLED_istream_test) {
     test_expression = new lab5::expression;
     std::istringstream sample_stream ("1+2-3");
     std::string output;
@@ -145,7 +145,7 @@ TEST_F(Lab05_Fixture, istream_test) {
     EXPECT_EQ("1 + 2 - 3", output);
 }
 
-TEST_F(Lab05_Fixture, simple_calc_test) {
+TEST_F(Lab05_Fixture, DISABLED_simple_calc_test) {
     std::string sample_string="1+2+3";
     test_expression = new lab5::expression(sample_string);
 
@@ -176,7 +176,7 @@ TEST_F(Lab05_Fixture, simple_calc_test) {
     EXPECT_EQ(7,test_expression->calculate_postfix());
 }
 
-TEST_F(Lab05_Fixture, calculate_test) {
+TEST_F(Lab05_Fixture, DISABLED_calculate_test) {
     std::string sample_string="32*45-(2+17)";
     test_expression = new lab5::expression(sample_string);
 

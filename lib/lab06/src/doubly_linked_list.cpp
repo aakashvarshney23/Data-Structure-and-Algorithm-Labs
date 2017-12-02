@@ -64,7 +64,7 @@ namespace lab6 {
     doubly_linked_list::doubly_linked_list(unsigned input) {
 
         node *temp = new node(input);
-        tail = head;
+        tail = head = temp;
         size = 1;
 
     }
@@ -84,17 +84,21 @@ namespace lab6 {
 // return the value inside of the node located at position
     unsigned doubly_linked_list::get_data(unsigned position) {
         node *temp = head;
-        int i = 0;
-        if (position == 0)
-            return head->data;
-        else {
-            while (i < position) {
-                temp = temp->next;
-                i++;
-            }
-            return temp->data;
+        if (position > size) {
+            return tail->data;
         }
+
+        for (int i = 0; i < position; i++) {
+            if (temp->next == nullptr) {
+                std::cout << "That location does not exist!!" << std::endl;
+                return 0;
+            }
+
+            temp = temp->next;
+        }
+        return temp->data;
     }
+
 
     // Get a set of values between position_from to position_to
     std::vector<unsigned> doubly_linked_list::get_set(unsigned position_from, unsigned position_to) {
@@ -143,10 +147,19 @@ namespace lab6 {
 
 // Allow for the merging of two lists using the + operator.
     doubly_linked_list doubly_linked_list::operator+(const doubly_linked_list &rhs) const {
-        doubly_linked_list obj1(*this);
-        doubly_linked_list obj2(rhs);
-        obj1.merge(obj2);
-        return obj1;
+        node *newnode;
+        node *list;
+        doubly_linked_list answer = *this;
+        //variable used for holding the linked list
+
+        //ptr pts to the first node of the given list
+        list = rhs.head;
+        //check to make sure the list is not empty and add list if there is something
+        while (list != nullptr) {
+            answer.append(list->data);
+            list = list->next;
+        }
+        return answer;
     }
 
     // Insert a node before the node located at position
@@ -327,43 +340,86 @@ namespace lab6 {
     void doubly_linked_list::swap_set(unsigned position1_from, unsigned position1_to, unsigned position2_from,
                                       unsigned position2_to) {
         node *temp = head;
-        node *mynext, *myprev, *start1, *end1, *mynext2, *myprev2, *start2, *end2;
-        int count1, count2;
-        count1 = 0;
-        count2 = 0;
+        node *mynext = head;
+        node *myprev = head;
+        node *start1 = head;
+        node *end1 = head;
+        node *mynext2 = head;
+        node *myprev2 = head;
+        node *start2 = head;
+        node *end2 = head;
 
-        while (temp->next != nullptr && count1 != position1_to) {
-            if (count1 < position1_from + 1) {
-                myprev = temp;
-                start1 = temp->next;
-                ++count1;
+        for (int i = 0; i < position1_to; i++) {
+            if (temp->next != nullptr) {
+                if (i <= position1_from) {
+                    myprev = start1;
+                    start1 = temp;
+                }
+                temp = temp->next;
             }
-            temp = temp->next;
         }
         end1 = temp;
         mynext = end1->next;
 
         temp = head;
 
-        while (temp->next != nullptr && count2++ != position2_to) {
-            if (count2 < position2_from + 1) {
-                myprev2 = temp;
-                start2 = temp->next;
+        for (int i = 0; i < position2_to; i++) {
+            if (temp->next != nullptr) {
+                if (i <= position2_from) {
+                    myprev2 = start2;
+                    start2 = temp;
+                }
+                temp = temp->next;
             }
-            temp = temp->next;
         }
+
         end2 = temp;
         mynext2 = end2->next;
 
-        end1->next = mynext2;
-        start1->prev = myprev2;
-        end2->next = mynext;
-        start2->prev = myprev;
+        if (position1_from == 0 && position2_to == size - 1) { //both sets are exactly at the beg and the end
+            start2->prev = nullptr;
+            mynext->prev = end2;
+            end2->next = mynext;
 
-        myprev->next = start2;
-        mynext->prev = end2;
-        myprev2->next = start1;
-        mynext2->prev = end1;
+            myprev2->next = start1;
+            start1->prev = myprev2;
+            end1->next = nullptr;
+
+            head = start2;
+            tail = end1;
+        } else if (position1_from == 0) { //first set is at the beg of the list
+            start2->prev = nullptr;
+            mynext->prev = end2;
+            end2->next = mynext;
+
+            myprev2->next = start1;
+            start1->prev = myprev2;
+            mynext2->prev = end1;
+            end1->next = mynext2;
+
+            head = start2;
+        } else if (position2_to == size - 1) { //second set is at the end of the list
+            myprev->next = start2;
+            start2->prev = myprev;
+            mynext->prev = end2;
+            end2->next = mynext;
+
+            myprev2->next = start1;
+            start1->prev = myprev2;
+            end1->next = nullptr;
+
+            tail = end1;
+        } else {
+            myprev->next = start2;
+            start2->prev = myprev;
+            mynext->prev = end2;
+            end2->next = mynext;
+
+            myprev2->next = start1;
+            start1->prev = myprev2;
+            mynext2->prev = end1;
+            end1->next = mynext2;
+        }
     }
 
 // Overload operator=
@@ -401,12 +457,9 @@ namespace lab6 {
 
 // Append the rhs to the end of the this list
     doubly_linked_list &doubly_linked_list::operator+=(const doubly_linked_list &RHS) {
-        doubly_linked_list obj1(*this);
-        doubly_linked_list obj2(RHS);
-
-        obj1.merge(obj2);
+        doubly_linked_list obj1 = *this + RHS;
         *this = obj1;
-        return obj1;
+        return *this;
     }
 
     unsigned doubly_linked_list::get_size() {
