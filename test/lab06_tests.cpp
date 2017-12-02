@@ -77,9 +77,9 @@ TEST_F(Lab06_Fixture, Swap) {
     list3->swap(3, 6);   // works fine when I test witht main and same values
     EXPECT_EQ(list3->get_data(3), 6);
     EXPECT_EQ(list3->get_data(6), 3);
-//    list3->swap_set(0, 2, 4, 5); //need to work on swap set
-//    EXPECT_EQ(list3->get_data(0), 4);
-//    EXPECT_EQ(list3->get_data(4), 1);
+    list3->swap_set(0, 2, 4, 5); //need to work on swap set
+    EXPECT_EQ(list3->get_data(0), 4);
+    EXPECT_EQ(list3->get_data(4), 1);
 }
 
 //

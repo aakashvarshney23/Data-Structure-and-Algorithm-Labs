@@ -308,117 +308,165 @@ namespace lab6 {
 
     // Swap two nodes in the list. USE POINTERS. Do not just swap the values!
     void doubly_linked_list::swap(unsigned position1, unsigned position2) {
-        node *temp = head;
+
         node *temp1 = head;
-        node *n1;
-        for (int i = 0; i < position1; i++) {
-            temp = temp->next;
+        unsigned count = 0;
+        if (position2 < position1) {
+            unsigned value = 0;
+            value = position2;
+            position2 = position1;
+            position1 = value;
         }
-        for (int j = 0; j < position2; j++) {
-            temp1 = temp1->next;
+        if (position2 == position1) {
+            throw "Error: Node can't be swapped with itself.";
         }
-        n1->next = temp->next;
-        n1->prev = temp->prev;
-
-        temp->prev = temp1->prev;
-        temp->next = temp1->next;
-
-        temp1->prev = n1->prev;
-        temp1->next = n1->next;
-
-        if (temp->next != nullptr)
-            temp->next->prev = temp; // n2;
-        if (temp->prev != nullptr)
-            temp->prev->next = temp; // n2;
-        if (temp1->next != nullptr)
-            temp1->next->prev = temp1; // n1;
-        if (temp1->prev != nullptr)
-            temp1->prev->next = temp1; // n1;
+        if (position2 > size || position1 > size) {
+            throw "Error: One or both of the positions are outside the linked list.";
+        }
+        swap_set(position1, position1, position2, position2);
     }
 
     // Swap two sets of cards. The sets are inclusive. USE POINTERS!
     void doubly_linked_list::swap_set(unsigned position1_from, unsigned position1_to, unsigned position2_from,
                                       unsigned position2_to) {
-        node *temp = head;
-        node *mynext = head;
-        node *myprev = head;
-        node *start1 = head;
-        node *end1 = head;
-        node *mynext2 = head;
-        node *myprev2 = head;
-        node *start2 = head;
-        node *end2 = head;
-
-        for (int i = 0; i < position1_to; i++) {
-            if (temp->next != nullptr) {
-                if (i <= position1_from) {
-                    myprev = start1;
-                    start1 = temp;
-                }
-                temp = temp->next;
+        node *temp1 = head;
+        unsigned count = 0;
+        if (position1_from > position1_to || position2_from > position2_to) {
+            if (position1_from > position1_to && position2_from > position2_to) {
+                unsigned value1;
+                value1 = position1_from;
+                position1_from = position1_to;
+                position1_to = value1;
+                unsigned value2;
+                value2 = position2_from;
+                position2_from = position2_to;
+                position2_to = value2;
+            }
+            if (position1_from > position1_to) {
+                unsigned value1;
+                value1 = position1_from;
+                position1_from = position1_to;
+                position1_to = value1;
+            }
+            if (position2_from > position2_to) {
+                unsigned value2;
+                value2 = position2_from;
+                position2_from = position2_to;
+                position2_to = value2;
             }
         }
-        end1 = temp;
-        mynext = end1->next;
-
-        temp = head;
-
-        for (int i = 0; i < position2_to; i++) {
-            if (temp->next != nullptr) {
-                if (i <= position2_from) {
-                    myprev2 = start2;
-                    start2 = temp;
-                }
-                temp = temp->next;
+        if (size < position1_from || size < position1_to || size < position2_from || size < position2_to) {
+            throw "Error: A position goes past the linked list.";
+        }
+        if (position1_from > position2_from || position1_to > position2_from || position1_from > position2_to ||
+            position1_to > position2_to) {
+            if (position2_to < position1_from) {
+                unsigned value1, value2;
+                value1 = position2_from;
+                value2 = position2_to;
+                position2_from = position1_from;
+                position2_to = position1_to;
+                position1_from = value1;
+                position1_to = value2;
+            } else if (position2_to < position1_to && position2_from < position1_from) {
+                unsigned value;
+                value = position2_from;
+                position2_to = position1_to;
+                position2_from = position2_to;
+                position1_to = position1_from;
+                position1_from = value;
+            } else if (position2_from < position1_from) {
+                unsigned value;
+                value = position2_from;
+                position2_from = position1_to;
+                position1_to = position1_from;
+                position1_from = value;
+            } else //position2_from < position1_to
+            {
+                unsigned value;
+                value = position2_from;
+                position2_from = position1_to;
+                position1_to = value;
             }
         }
-
-        end2 = temp;
-        mynext2 = end2->next;
-
-        if (position1_from == 0 && position2_to == size - 1) { //both sets are exactly at the beg and the end
-            start2->prev = nullptr;
-            mynext->prev = end2;
-            end2->next = mynext;
-
-            myprev2->next = start1;
-            start1->prev = myprev2;
-            end1->next = nullptr;
-
-            head = start2;
-            tail = end1;
-        } else if (position1_from == 0) { //first set is at the beg of the list
-            start2->prev = nullptr;
-            mynext->prev = end2;
-            end2->next = mynext;
-
-            myprev2->next = start1;
-            start1->prev = myprev2;
-            mynext2->prev = end1;
-            end1->next = mynext2;
-
-            head = start2;
-        } else if (position2_to == size - 1) { //second set is at the end of the list
-            myprev->next = start2;
-            start2->prev = myprev;
-            mynext->prev = end2;
-            end2->next = mynext;
-
-            myprev2->next = start1;
-            start1->prev = myprev2;
-            end1->next = nullptr;
-
-            tail = end1;
-        } else {
-            myprev->next = start2;
-            start2->prev = myprev;
-            mynext->prev = end2;
-            end2->next = mynext;
-
-            myprev2->next = start1;
-            start1->prev = myprev2;
-            mynext2->prev = end1;
-            end1->next = mynext2;
+        while (count != position1_from) {//iterate till temp1 reaches position1_from
+            temp1 = temp1->next;
+            count++;
+        }
+        node *saver_from1 = temp1;//saves node at position1_from
+        while (count != position1_to) {//iterate till temp1 reaches position1_to
+            temp1 = temp1->next;
+            count++;
+        }
+        node *saver_to1 = temp1;//saves node at position1_to
+        node *temp2 = temp1;//continues where temp1 left off
+        while (count != position2_from) {//iterate till temp2  reaches position2_from
+            temp2 = temp2->next;
+            count++;
+        }
+        node *saver_from2 = temp2; //saves node at position2_from
+        while (count != position2_to) {//itereate till temp2 reaches position2_to
+            temp2 = temp2->next;
+            count++;
+        }
+        node *saver_to2 = temp2;//saves node at position2_to
+        if (saver_to1->next == saver_from2 &&
+            saver_from2->prev == saver_to1)//position1_to and position2_from are next to eachother
+        {
+            node *temp1_prev = saver_to1->prev;
+            node *temp2_next = saver_to2->next;
+            if (saver_from1->prev != nullptr) {
+                temp1_prev->next = saver_from2;
+            }
+            if (saver_to2->next != nullptr) {
+                temp2_next->prev = saver_to1;
+            }
+            saver_from2->prev = temp1_prev;
+            saver_to1->next = temp2_next;
+            saver_from1->prev = saver_to2;
+            saver_to2->next = saver_from1;
+        } else if (saver_to1->next !=
+                   saver_from2->prev)//position1_to and position2_from have more than 1 node between them
+        {
+            node *temp1_prev = saver_from1->prev;
+            node *temp1_next = saver_to1->next;
+            node *temp2_prev = saver_from2->prev;
+            node *temp2_next = saver_to2->next;
+            temp2_prev->next = saver_from1;
+            if (saver_from1->prev != nullptr) {
+                temp1_prev->next = saver_from2;
+            }
+            temp1_next->prev = saver_to2;
+            saver_to1->next = temp2_next;
+            saver_from1->prev = temp2_prev;
+            if (saver_to2->next != nullptr) {
+                temp2_next->prev = saver_from1;
+            }
+            saver_to2->next = temp1_next;
+            saver_from2->prev = temp1_prev;
+        } else//position1_to and position2_from have only 1 node between them
+        {
+            node *temp1_prev = saver_from1->prev;
+            node *temp_middle = saver_to1->next;
+            node *temp2_next = saver_to2->next;
+            temp_middle->next = saver_from1;
+            temp_middle->prev = saver_to2;
+            if (temp1_prev != nullptr) {
+                temp1_prev->next = saver_from2;
+            }
+            if (temp2_next != nullptr) {
+                temp2_next->prev = saver_to1;
+            }
+            saver_to1->next = temp2_next;
+            saver_from1->prev = temp_middle;
+            saver_to2->next = temp_middle;
+            saver_from2->prev = temp1_prev;
+        }
+        if (saver_from2->prev == nullptr) {
+            head = saver_from2;
+        }
+        if (saver_to1->next == nullptr) {
+            tail = saver_to1;
         }
     }
 

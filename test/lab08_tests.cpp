@@ -46,11 +46,11 @@ TEST_F(Lab8_Tests,insertion_sort) {
 
     EXPECT_EQ(sorted0,  sorting_machine.insertion_sort(*unsorted_list,  0).to_string());
     EXPECT_EQ(sorted1,  sorting_machine.insertion_sort(*unsorted_list,  1).to_string());
- //   EXPECT_EQ(sorted5,  sorting_machine.insertion_sort(*unsorted_list,  5).to_string());
-//    EXPECT_EQ(sorted10, sorting_machine.insertion_sort(*unsorted_list, 10).to_string());
- //   EXPECT_EQ(sorted15, sorting_machine.insertion_sort(*unsorted_list, 15).to_string());
-   // EXPECT_EQ(sorted20, sorting_machine.insertion_sort(*unsorted_list, 20).to_string());
-//    EXPECT_EQ(sorted25, sorting_machine.insertion_sort(*unsorted_list, 25).to_string());
+    EXPECT_EQ(sorted5,  sorting_machine.insertion_sort(*unsorted_list,  5).to_string());
+    EXPECT_EQ(sorted10, sorting_machine.insertion_sort(*unsorted_list, 10).to_string());
+    EXPECT_EQ(sorted15, sorting_machine.insertion_sort(*unsorted_list, 15).to_string());
+    EXPECT_EQ(sorted20, sorting_machine.insertion_sort(*unsorted_list, 20).to_string());
+    EXPECT_EQ(sorted25, sorting_machine.insertion_sort(*unsorted_list, 25).to_string());
 
     std::string small_sorted0 = "5, 3, 4, 1, 2, 7, 6";
     std::string small_sorted1 = "3, 5, 4, 1, 2, 7, 6";
@@ -63,17 +63,17 @@ TEST_F(Lab8_Tests,insertion_sort) {
     std::string small_sorted8 = "1, 2, 3, 4, 5, 6, 7";
 
     EXPECT_EQ(small_sorted0, sorting_machine.insertion_sort(*small_unsorted_list,0).to_string());
-//    EXPECT_EQ(small_sorted1, sorting_machine.insertion_sort(*small_unsorted_list,1).to_string());
-//    EXPECT_EQ(small_sorted2, sorting_machine.insertion_sort(*small_unsorted_list,2).to_string());
-//    EXPECT_EQ(small_sorted3, sorting_machine.insertion_sort(*small_unsorted_list,3).to_string());
-//    EXPECT_EQ(small_sorted4, sorting_machine.insertion_sort(*small_unsorted_list,4).to_string());
-//    EXPECT_EQ(small_sorted5, sorting_machine.insertion_sort(*small_unsorted_list,5).to_string());
-//    EXPECT_EQ(small_sorted6, sorting_machine.insertion_sort(*small_unsorted_list,6).to_string());
-//    EXPECT_EQ(small_sorted7, sorting_machine.insertion_sort(*small_unsorted_list,7).to_string());
-//    EXPECT_EQ(small_sorted8, sorting_machine.insertion_sort(*small_unsorted_list,8).to_string());
+    EXPECT_EQ(small_sorted1, sorting_machine.insertion_sort(*small_unsorted_list,1).to_string());
+    EXPECT_EQ(small_sorted2, sorting_machine.insertion_sort(*small_unsorted_list,2).to_string());
+    EXPECT_EQ(small_sorted3, sorting_machine.insertion_sort(*small_unsorted_list,3).to_string());
+    EXPECT_EQ(small_sorted4, sorting_machine.insertion_sort(*small_unsorted_list,4).to_string());
+    EXPECT_EQ(small_sorted5, sorting_machine.insertion_sort(*small_unsorted_list,5).to_string());
+    EXPECT_EQ(small_sorted6, sorting_machine.insertion_sort(*small_unsorted_list,6).to_string());
+    EXPECT_EQ(small_sorted7, sorting_machine.insertion_sort(*small_unsorted_list,7).to_string());
+    EXPECT_EQ(small_sorted8, sorting_machine.insertion_sort(*small_unsorted_list,8).to_string());
 }
 
-TEST_F(Lab8_Tests, selection_sort){
+TEST_F(Lab8_Tests, DISABLED_selection_sort){
     std::string small_sorted0 = "5, 3, 4, 1, 2, 7, 6";
     std::string small_sorted1 = "1, 3, 4, 5, 2, 7, 6";
     std::string small_sorted2 = "1, 2, 4, 5, 3, 7, 6";
@@ -111,7 +111,7 @@ TEST_F(Lab8_Tests, selection_sort){
     EXPECT_EQ(sorted25, sorting_machine.selection_sort(*unsorted_list,25).to_string());
 }
 
-TEST_F(Lab8_Tests,bubble_sort){
+TEST_F(Lab8_Tests,DISABLED_bubble_sort){
     std::string small_sorted0 = "5, 3, 4, 1, 2, 7, 6";
     std::string small_sorted1 = "3, 4, 1, 2, 5, 6, 7";
     std::string small_sorted2 = "3, 1, 2, 4, 5, 6, 7";
@@ -141,7 +141,7 @@ TEST_F(Lab8_Tests,bubble_sort){
     EXPECT_EQ(sorted25, sorting_machine.bubble_sort(*unsorted_list,25).to_string());
 }
 
-TEST_F(Lab8_Tests, cocktail_sort){
+TEST_F(Lab8_Tests, DISABLED_cocktail_sort){
     std::string small_sorted0 = "5, 3, 4, 1, 2, 7, 6";
     std::string small_sorted1 = "1, 3, 4, 2, 5, 6, 7";
     std::string small_sorted2 = "1, 2, 3, 4, 5, 6, 7";

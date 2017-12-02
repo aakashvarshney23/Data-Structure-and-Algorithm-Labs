@@ -71,6 +71,17 @@ namespace lab5 {
         //step 2 update next of node pointed to by tail with address of new node
         //step 3 update tail with address of new node
         //step 4 update size of stack variable
+        node* temp;
+        temp=new node (data);
+        if(head== nullptr){
+            head=temp;
+            tail=temp;
+        }
+        else{
+            tail->next=temp;
+            tail=tail->next;
+        }
+        size++;
     }
 
     void queue::dequeue() {
@@ -78,5 +89,12 @@ namespace lab5 {
         //step 2 update head with address of second node
         //step 3 delete node pointed to by address stored in step 1
         //step 4 update size of stack variable
+        node *temp;
+        if(head!= nullptr){
+            temp= head;
+            head=head->next;
+            delete temp;
+            size--;
+        }
     }
 }
