@@ -73,7 +73,7 @@ TEST_F(Lab8_Tests,insertion_sort) {
     EXPECT_EQ(small_sorted8, sorting_machine.insertion_sort(*small_unsorted_list,8).to_string());
 }
 
-TEST_F(Lab8_Tests, DISABLED_selection_sort){
+TEST_F(Lab8_Tests, selection_sort){
     std::string small_sorted0 = "5, 3, 4, 1, 2, 7, 6";
     std::string small_sorted1 = "1, 3, 4, 5, 2, 7, 6";
     std::string small_sorted2 = "1, 2, 4, 5, 3, 7, 6";
@@ -111,7 +111,7 @@ TEST_F(Lab8_Tests, DISABLED_selection_sort){
     EXPECT_EQ(sorted25, sorting_machine.selection_sort(*unsorted_list,25).to_string());
 }
 
-TEST_F(Lab8_Tests,DISABLED_bubble_sort){
+TEST_F(Lab8_Tests, bubble_sort){
     std::string small_sorted0 = "5, 3, 4, 1, 2, 7, 6";
     std::string small_sorted1 = "3, 4, 1, 2, 5, 6, 7";
     std::string small_sorted2 = "3, 1, 2, 4, 5, 6, 7";
@@ -141,7 +141,7 @@ TEST_F(Lab8_Tests,DISABLED_bubble_sort){
     EXPECT_EQ(sorted25, sorting_machine.bubble_sort(*unsorted_list,25).to_string());
 }
 
-TEST_F(Lab8_Tests, DISABLED_cocktail_sort){
+TEST_F(Lab8_Tests, cocktail_sort){
     std::string small_sorted0 = "5, 3, 4, 1, 2, 7, 6";
     std::string small_sorted1 = "1, 3, 4, 2, 5, 6, 7";
     std::string small_sorted2 = "1, 2, 3, 4, 5, 6, 7";
