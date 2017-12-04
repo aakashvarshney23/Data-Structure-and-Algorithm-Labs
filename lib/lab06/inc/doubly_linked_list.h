@@ -44,6 +44,7 @@ bool is_valid(unsigned int position);public:
         bool operator==(const doubly_linked_list& rhs)const;
         std::string to_string();
         void print();
+        void swap_data(unsigned position1, unsigned position2);
 
     };
 }

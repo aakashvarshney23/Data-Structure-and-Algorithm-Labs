@@ -169,7 +169,7 @@ TEST_F(Lab8_Tests, cocktail_sort){
     EXPECT_EQ(sorted25, sorting_machine.cocktail_sort(*unsorted_list,25).to_string());
 }
 
-TEST_F(Lab8_Tests, DISABLED_merge_sort){
+TEST_F(Lab8_Tests, merge_sort){
     std::string small_sorted = "1, 2, 3, 4, 5, 6, 7";
     EXPECT_EQ(small_sorted, sorting_machine.merge_sort(*small_unsorted_list).to_string());
 
@@ -177,7 +177,7 @@ TEST_F(Lab8_Tests, DISABLED_merge_sort){
     EXPECT_EQ(sorted, sorting_machine.merge_sort(*unsorted_list).to_string());
 }
 
-TEST_F(Lab8_Tests, DISABLED_quick_sort){
+TEST_F(Lab8_Tests, quick_sort){
     std::string small_sorted = "1, 2, 3, 4, 5, 6, 7";
     EXPECT_EQ(small_sorted, sorting_machine.quick_sort(*small_unsorted_list).to_string());
 
@@ -185,7 +185,7 @@ TEST_F(Lab8_Tests, DISABLED_quick_sort){
     EXPECT_EQ(sorted, sorting_machine.quick_sort(*unsorted_list).to_string());
 }
 
-TEST_F(Lab8_Tests, DISABLED_radix_sort){
+TEST_F(Lab8_Tests, radix_sort){
     std::string small_sorted = "1, 2, 3, 4, 5, 6, 7";
     EXPECT_EQ(small_sorted, sorting_machine.radix_sort(*small_unsorted_list).to_string());
 
