@@ -1,5 +1,6 @@
 #include "../inc/expression.h"
 #include <iostream>
+
 namespace lab5 {
     /****Auxillary Function prototypes ****/
     bool is_number(std::string input_string);
@@ -23,12 +24,10 @@ namespace lab5 {
     /****end function prototypes****/
 
     expression::expression() {
-
     }
 
     expression::expression(std::string &input_expression) {
         parse_to_infix(input_expression);
-
     }
 
     void expression::convert_to_postfix(std::string &input_expression) {
@@ -192,9 +191,6 @@ namespace lab5 {
         return steam;
     }
 
-
-//auxillary functions
-
     bool is_number(std::string input_string) {
         if (input_string >= "0" && input_string <= "9") {
             return true;
@@ -220,11 +216,9 @@ namespace lab5 {
     }
 
     int get_number(std::string input_string) {
-
     }
 
     std::string get_operator(std::string input_string) {
-
     }
 
     bool is_left_parenthesis(std::string in) {
@@ -265,7 +259,7 @@ namespace lab5 {
     }
 
     std::string calculate_operation(std::string &operate, std::string &operand, std::string &oper2) {
-        //used for calculation
+
         int value;
         std::string result;
 
@@ -295,8 +289,6 @@ namespace lab5 {
                 }
 
             }
-
-
         }
         result = std::to_string(value);
 

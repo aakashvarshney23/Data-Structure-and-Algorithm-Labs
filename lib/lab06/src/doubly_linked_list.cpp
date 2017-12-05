@@ -356,7 +356,7 @@ namespace lab6 {
             }
         }
         if (size < position1_from || size < position1_to || size < position2_from || size < position2_to) {
-            throw "Error: A position goes past the linked list.";
+            throw "Position doesn't exist";
         }
         if (position1_from > position2_from || position1_to > position2_from || position1_from > position2_to ||
             position1_to > position2_to) {
@@ -381,7 +381,7 @@ namespace lab6 {
                 position2_from = position1_to;
                 position1_to = position1_from;
                 position1_from = value;
-            } else //position2_from < position1_to
+            } else
             {
                 unsigned value;
                 value = position2_from;
@@ -389,29 +389,29 @@ namespace lab6 {
                 position1_to = value;
             }
         }
-        while (count != position1_from) {//iterate till temp1 reaches position1_from
+        while (count != position1_from) {
             temp1 = temp1->next;
             count++;
         }
-        node *saver_from1 = temp1;//saves node at position1_from
-        while (count != position1_to) {//iterate till temp1 reaches position1_to
+        node *saver_from1 = temp1;
+        while (count != position1_to) {
             temp1 = temp1->next;
             count++;
         }
-        node *saver_to1 = temp1;//saves node at position1_to
-        node *temp2 = temp1;//continues where temp1 left off
-        while (count != position2_from) {//iterate till temp2  reaches position2_from
+        node *saver_to1 = temp1;
+        node *temp2 = temp1;
+        while (count != position2_from) {
             temp2 = temp2->next;
             count++;
         }
-        node *saver_from2 = temp2; //saves node at position2_from
-        while (count != position2_to) {//itereate till temp2 reaches position2_to
+        node *saver_from2 = temp2;
+        while (count != position2_to) {
             temp2 = temp2->next;
             count++;
         }
-        node *saver_to2 = temp2;//saves node at position2_to
+        node *saver_to2 = temp2;
         if (saver_to1->next == saver_from2 &&
-            saver_from2->prev == saver_to1)//position1_to and position2_from are next to eachother
+            saver_from2->prev == saver_to1)
         {
             node *temp1_prev = saver_to1->prev;
             node *temp2_next = saver_to2->next;
@@ -426,7 +426,7 @@ namespace lab6 {
             saver_from1->prev = saver_to2;
             saver_to2->next = saver_from1;
         } else if (saver_to1->next !=
-                   saver_from2->prev)//position1_to and position2_from have more than 1 node between them
+                   saver_from2->prev)
         {
             node *temp1_prev = saver_from1->prev;
             node *temp1_next = saver_to1->next;
@@ -444,7 +444,7 @@ namespace lab6 {
             }
             saver_to2->next = temp1_next;
             saver_from2->prev = temp1_prev;
-        } else//position1_to and position2_from have only 1 node between them
+        } else
         {
             node *temp1_prev = saver_from1->prev;
             node *temp_middle = saver_to1->next;
@@ -472,14 +472,14 @@ namespace lab6 {
 
 // Overload operator=
     doubly_linked_list &doubly_linked_list::operator=(const doubly_linked_list &RHS) {
-        node *dest;
+        node *look;
         node *newnode;
-        node *other = RHS.head;
+        node *temp = RHS.head;
         if (head) {
             while (head) {
-                dest = head;
+                look = head;
                 head = head->next;
-                delete dest;
+                delete look;
             }
             tail = nullptr;
             size = 0;
@@ -491,14 +491,14 @@ namespace lab6 {
         } else {
 
             size = RHS.size;
-            head = new node(other->data);
+            head = new node(temp->data);
             tail = head;
-            other = other->next;
-            while (other) {
-                newnode = new node(other->data);
+            temp = temp->next;
+            while (temp) {
+                newnode = new node(temp->data);
                 tail->next = newnode;
                 tail = newnode;
-                other = other->next;
+                temp = temp->next;
             }
         }
     }
@@ -580,5 +580,15 @@ namespace lab6 {
         temp = temp1->data;
         temp1->data = temp2->data;
         temp2->data = temp;
+    }
+    void doubly_linked_list::setter(int location, int value){
+        node* temp= head;
+        int temploc=0;
+
+        while(temp!= nullptr && temploc++ != location){
+            temp = temp->next;
+        }
+
+        temp->data = value;
     }
 }

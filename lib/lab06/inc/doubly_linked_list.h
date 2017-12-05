@@ -45,6 +45,7 @@ bool is_valid(unsigned int position);public:
         std::string to_string();
         void print();
         void swap_data(unsigned position1, unsigned position2);
+        void setter(int location, int value);
 
     };
 }

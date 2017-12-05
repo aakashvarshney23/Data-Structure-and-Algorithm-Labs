@@ -97,7 +97,7 @@ namespace lab5 {
             size--;
         }
         else {
-            std::cout << "stack has nothing in it ";
+            std::cout << "Empty stack ";
         }
     }
 }

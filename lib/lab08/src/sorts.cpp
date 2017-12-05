@@ -76,17 +76,122 @@ lab6::doubly_linked_list sorts::cocktail_sort(lab6::doubly_linked_list input, in
 }
 
 lab6::doubly_linked_list sorts::quick_sort(lab6::doubly_linked_list input) {
-    lab6::doubly_linked_list working_list(input);
-    return quickSort(working_list, 0, working_list.get_size() - 1); //working_list;
+    lab6::doubly_linked_list copy_list(input);
+    return quickSort(copy_list, 0, copy_list.get_size() - 1); //working_list;
 }
 
 lab6::doubly_linked_list sorts::merge_sort(lab6::doubly_linked_list input) {
-    return lab6::doubly_linked_list();
+    lab6::doubly_linked_list copy_list = input;
+    int size = copy_list.get_size();
+
+
+    if(size <= 1)
+        return copy_list;
+
+    lab6::doubly_linked_list Left_list;
+    lab6::doubly_linked_list Right_list;
+
+    for(unsigned i = 0; i < size; i++)
+    {
+        if(i < size/2)
+            Left_list.append(copy_list.get_data(i));
+        else
+            Right_list.append(copy_list.get_data(i));
+    }
+
+    Left_list = merge_sort(Left_list);
+    Right_list = merge_sort(Right_list);
+    return merge(Left_list,Right_list);
+
+    return copy_list;
 }
 
 lab6::doubly_linked_list sorts::radix_sort(lab6::doubly_linked_list input) {
+ lab6::doubly_linked_list copy_list(input);
+    int size = copy_list.get_size();
+    return radixsort(copy_list, size);
+}
 
-    return lab6::doubly_linked_list();
+lab6::doubly_linked_list sorts::quickSort(lab6::doubly_linked_list &input_list, int left, int right) {
+    int i = left, j = right;
+    int pivot = input_list.get_data((left + right) / 2);
+    while (i <= j) {
+        while (input_list.get_data(i) < pivot)
+            i++;
+        while (input_list.get_data(j) > pivot)
+            j--;
+        if (i <= j) {
+            input_list.swap_data(i, j);
+            i++;
+            j--;
+        }
+    };
+    if (left < j)
+        quickSort(input_list, left, j);
+    if (i < right)
+        quickSort(input_list, i, right);
+    return input_list;
+}
+
+lab6::doubly_linked_list sorts::merge(lab6::doubly_linked_list left, lab6::doubly_linked_list right) //other
+{
+    lab6::doubly_linked_list result;
+    while (!left.is_empty() && !right.is_empty())
+    {
+        if(left.get_data(0) <= right.get_data(0))
+        {
+            result.append(left.get_data(0));
+            left.remove(0);
+        }
+        else {
+            result.append(right.get_data(0));
+            right.remove(0);
+        }
+    }
+    while (!left.is_empty())
+    {
+        result.append(left.get_data(0));
+        left.remove(0);
+    }
+    while (!right.is_empty())
+    {
+        result.append(right.get_data(0));
+        right.remove(0);
+    }
+    return result;
+}
+lab6::doubly_linked_list sorts::radixsort(lab6::doubly_linked_list &input_list, int n)
+{
+
+    int m = input_list.get_data(0);
+    for (int i = 1; i < n; i++)
+        if (input_list.get_data(i) > m)
+            m = input_list.get_data(i);
+
+    for (int exp = 1; m/exp > 0; exp *= 10)
+        sort_count(input_list, n, exp);
+
+    return input_list;
+}
+
+void sorts::sort_count(lab6::doubly_linked_list &input_list, int n, int exp)
+{
+    int output_array[n];
+    int i, counter[10] = {0};
+
+    for (i = 0; i < n; i++)
+        counter[ (input_list.get_data(i)/exp)%10 ]++;
+
+    for (i = 1; i < 10; i++)
+        counter[i] += counter[i - 1];
+
+    for (i = n - 1; i >= 0; i--)
+    {
+        output_array[counter[ (input_list.get_data(i)/exp)%10 ] - 1] = input_list.get_data(i);
+        counter[ (input_list.get_data(i)/exp)%10 ]--;
+    }
+    for (i = 0; i < n; i++)
+        input_list.setter(i,output_array[i]);
 }
 
 //int sorts::partition(lab6::doubly_linked_list input, int start, int end)
@@ -111,23 +216,3 @@ lab6::doubly_linked_list sorts::radix_sort(lab6::doubly_linked_list input) {
 //        quickSortHelper(input, pi + 1, end);
 //    }
 //}
-lab6::doubly_linked_list sorts::quickSort(lab6::doubly_linked_list &obj, int left, int right) {
-    int i = left, j = right;
-    int pivot = obj.get_data((left + right) / 2);
-    while (i <= j) {
-        while (obj.get_data(i) < pivot)
-            i++;
-        while (obj.get_data(j) > pivot)
-            j--;
-        if (i <= j) {
-            obj.swap_data(i, j);
-            i++;
-            j--;
-        }
-    };
-    if (left < j)
-        quickSort(obj, left, j);
-    if (i < right)
-        quickSort(obj, i, right);
-    return obj;
-}
