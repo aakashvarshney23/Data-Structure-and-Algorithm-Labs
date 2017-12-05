@@ -295,3 +295,4 @@ namespace lab5 {
         return result;
     }
 }
+//
